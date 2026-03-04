@@ -3,6 +3,12 @@ const createElements = (arr) => {
     return (htmlElements.join(" "))
 };
 
+function pronounceWord(word) {
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-EN"; // English
+    window.speechSynthesis.speak(utterance);
+}
+
 const manageSpinner = (status) => {
     if (status == true) {
         document.getElementById("spinner").classList.remove("hidden")
@@ -68,11 +74,11 @@ const displayWordDetails = (word) => {
     const detailsBox = document.getElementById("details-container");
     detailsBox.innerHTML = `
                 <div>
-                    <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation})</h2>
+                    <h2 class="text-2xl font-bold">${word.word} (<i class="fa-solid fa-microphone-lines"></i>:${word.pronunciation ? word.pronunciation : "pronunciation পাওয়া যায় নি"})</h2>
                 </div>
                 <div>
                     <h2 class="font-bold">Meaning</h2>
-                    <p>${word.meaning}</p>
+                    <p>${word.meaning ? word.meaning : "অর্থ পাওয়া যায় নি"}</p>
                 </div>
                 <div>
                     <h2 class="font-bold">Sentence</h2>
@@ -123,7 +129,7 @@ const displayLevelWord = (words) => {
                 <button onclick="loadWordDetail(${word.id})" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]">
                     <i class="fa-solid fa-circle-info"></i>
                 </button>
-                <button class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]">
+                <button onclick = "pronounceWord('${word.word}')" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]">
                     <i class="fa-solid fa-volume-high"></i>
                 </button>
             </div>
@@ -149,3 +155,21 @@ const displayLessons = (lessons) => {
     }
 }
 loadLessons()
+
+document.getElementById("btn-search").addEventListener("click", () => {
+    removeActive();
+    const input = document.getElementById("input-search")
+    const searchValue = input.value.trim().toLowerCase();
+
+    fetch("https://openapi.programming-hero.com/api/words/all")
+        .then(res => res.json())
+        .then((data) => {
+            const allWords = data.data;
+            const filterWords = allWords.filter(word => word.word.toLowerCase().includes(searchValue));
+            displayLevelWord(filterWords)
+        });
+})
+
+const mainContVisible = () =>{
+    document.getElementById('main-container').classList.remove("hidden")
+}

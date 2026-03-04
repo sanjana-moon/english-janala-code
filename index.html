@@ -21,7 +21,6 @@
         href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-
     <!-- tailwind daisy UI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -94,7 +93,7 @@
                 <input type="text" class="input" placeholder="....................." list="browsers" />
             </div>
             <div>
-                <button class="btn btn-active btn-primary">Get Started</button>
+                <button onclick="mainContVisible()" class="btn btn-primary">Get Started</button>
             </div>
         </div>
         <div class="image flex-1">
@@ -102,41 +101,76 @@
         </div>
     </section>
 
-    <section>
-        <h2 class="text-4xl font-bold mb-8 text-center"><span class="text-sky-400">Let's</span> Learn Vocabularies
-        </h2>
+    <main id="main-container" class="hidden">
+        <section class="py-10">
+            <h2 class="text-4xl font-bold mb-8 text-center"><span class="text-sky-400">Let's</span> Learn Vocabularies
+            </h2>
 
-        <div id="level-container" class="flex gap-5 flex-wrap justify-center"></div>
-    </section>
+            <div id="level-container" class="flex gap-5 flex-wrap justify-center"></div>
+        </section>
 
-    <section id="spinner" class="flex justify-center items-center py-10 hidden">
-        <span class="loading loading-bars loading-xl"></span>
-    </section>
-
-    <section id="word-container" class="bg-gray-200 p-10 w-11/12 mx-auto my-10 grid grid-cols-3 gap-5">
-        <div class="text-center col-span-full rounded-xl py-10 space-y-6 font-bangla">
-            <p class="text-xl font-medium text-gray-400">আপনি এখনো কোন Lesson Select করেন নি</p>
-            <h2 class="font-bold text-4xl">একটি Lesson Select করুন।</h2>
-        </div>
-        </div>
-    </section>
-
-    <!-- Open the modal using ID.showModal() method -->
-    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-    <dialog id="word-modal" class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-            <div id="details-container" class="space-y-5">
-
+        <section class="flex justify-center">
+            <div class="join">
+                <div>
+                    <label class="input validator join-item">
+                        <input id="input-search" type="text" placeholder="Search Vocabulary Now" required />
+                    </label>
+                </div>
+                <button id="btn-search" class="btn btn-primary join-item">Search</button>
             </div>
-            <div class="modal-action">
-                <form method="dialog">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button class="btn">Close</button>
-                </form>
+        </section>
+
+        <section id="spinner" class="flex justify-center items-center py-10 hidden">
+            <span class="loading loading-bars loading-xl"></span>
+        </section>
+
+        <section id="word-container" class="bg-gray-200 p-10 w-11/12 mx-auto my-10 grid grid-cols-1 gap-5 md:grid-cols-3 ">
+            <div class="text-center col-span-full rounded-xl py-10 space-y-6 font-bangla">
+                <p class="text-xl font-medium text-gray-400">আপনি এখনো কোন Lesson Select করেন নি</p>
+                <h2 class="font-bold text-4xl">একটি Lesson Select করুন।</h2>
+            </div>
+            </div>
+        </section>
+
+        <!-- Open the modal using ID.showModal() method -->
+        <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+        <dialog id="word-modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="details-container" class="space-y-5">
+
+                </div>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </main>
+
+    <section class="mt-10">
+        <hr>
+        <div class="flex-col gap-6 justify-between items-center p-5 py-6 border-gray-50 md:flex-row px-[80px]">
+            <div>
+                <h2 class="flex items-center gap-1  text-lg mb-2">
+                    <span class="font-semibold">English</span>
+                    <img src="./assets/logo.png" alt="">
+                    <span class="font-bangla">জানালা</span>
+                </h2>
+                <p class="font-bangla font-medium mb-1">ইংরেজি শিখুন সহজে</p>
+                <p class="mb-5">Providing ED-Tech Applications since 2025</p>
+            </div>
+            <div>
+                <h3 class="text-[#18181B] font-semibold text-sm">FOLLOW US</h3>
+                <ul class="flex justify-start gap-2">
+                    <li><i class="fa-brands fa-facebook"></i></li>
+                    <li><i class="fa-brands fa-youtube"></i></li>
+                    <li><i class="fa-brands fa-instagram"></i></li>
+                </ul>
             </div>
         </div>
-    </dialog>
-
+    </section>
 
     <script src="./script.js"></script>
 </body>
